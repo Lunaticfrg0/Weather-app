@@ -8,7 +8,7 @@ const geolocate = (address, callback) =>{
         callback("Unable to connect to geolocation service!", undefined)
     }
     else if(response.body.features.length === 0){
-        callback("Unable to find location. Try another search !", undefined)
+        callback("Unable to find location. Try another search!", undefined)
     }
     else{
         const data = response.body.features[0];
