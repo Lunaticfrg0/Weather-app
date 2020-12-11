@@ -3,15 +3,15 @@ const apiKeys = require("./constants.js");
 
 const geolocate = (address, callback) =>{
     const urlGeolocation = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${apiKeys.mapbox}&limit=1`;
-    request({url: urlGeolocation, json: true}, (error, response)=>{
+    request({url: urlGeolocation, json: true}, (error, {body})=>{
         if(error){
         callback("Unable to connect to geolocation service!", undefined)
     }
-    else if(response.body.features.length === 0){
+    else if(body.features.length === 0){
         callback("Unable to find location. Try another search!", undefined)
     }
     else{
-        const data = response.body.features[0];
+        const data = body.features[0];
         callback(undefined, {
             latitude: data.center[1],
             longitude: data.center[0],
